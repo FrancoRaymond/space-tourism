@@ -1,0 +1,115 @@
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom'; 
+import logo from '../assets/shared/logo.svg';
+import menu from '../assets/shared/icon-hamburger.svg';
+import close from '../assets/shared/icon-close.svg';
+
+const Navbar = () => {
+    const [size, setSize] = useState(window.innerWidth);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const location = useLocation(); 
+
+    useEffect(() => {
+        const handleResize = () => {
+            setSize(window.innerWidth);
+            if (window.innerWidth >= 640) {
+                setIsMenuOpen(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [isMenuOpen]);
+
+    const handleMenuClick = () => {
+        setIsMenuOpen((prev) => !prev);
+    };
+
+    return (
+        <div className="fixed top-5 text-white w-full z-50 flex justify-between px-2 sm:px-5 md:px-10 lg:px-32 pt-3 items-center">
+            <a href=""><img src={logo} alt="logo" className="size-8" /></a> 
+            <nav
+                className={` backdrop-blur-md bg-white/20 py-4 px-20 ${
+                    size >= 640
+                        ? 'block relative h-auto bg-transparent' 
+                        : isMenuOpen
+                        ? 'absolute w-full py-10 h-screen bg-black bg-opacity-20 top-14 left-1/2 -translate-x-1/2 items-center' 
+                        : 'hidden' 
+                }`}
+            >
+                <ul
+                    className={`flex gap-7 ${
+                        isMenuOpen && size < 640 ? 'flex-col mx-auto w-fit items-center' : ''
+                    }`}
+                >
+                    <li>
+                        <a
+                            href="/"
+                            className={` ${
+                                location.pathname === '/' ? 'border-b-2 border-white' : ''
+                            } py-4`}
+                        >
+                            <strong>00</strong>  Home
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/destination"
+                            className={`${
+                                location.pathname === '/destination'
+                                    ? 'border-b-2 border-white'
+                                    : ''
+                            } py-4`}
+                        >
+                            <strong>01</strong>  Destination
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/crew"
+                            className={` ${
+                                location.pathname === '/crew' ? 'border-b-2 border-white' : ''
+                            } py-4`}
+                        >
+                            <strong>02</strong>  Crew
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="/technology"
+                            className={` ${
+                                location.pathname === '/technology'
+                                    ? 'border-b-2 border-white'
+                                    : ''
+                            } py-4`}
+                        >
+                            <strong>03</strong>  Technology
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <img
+                src={menu}
+                onClick={handleMenuClick}
+                alt="hamburger icon"
+                className={`${size >= 640 || isMenuOpen ? 'hidden' : 'block'} size-6 cursor-pointer`}
+            />
+            <img
+                src={close}
+                onClick={handleMenuClick}
+                alt="close menu icon"
+                className={`${isMenuOpen ? 'block' : 'hidden'} size-6 cursor-pointer`}
+            />
+        </div>
+    );
+};
+
+export default Navbar;

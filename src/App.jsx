@@ -1,13 +1,23 @@
 import React from 'react'
-
+import { Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import Destination from './pages/Destination'
+import Crew from './pages/Crew'
+import Technology from './pages/Technology'
 
 function App() {
  
-
   return (
-    <div className='bg-blue-200 min-h-screen flex items-center align-middle px-2'>
-     <h1 className='text-5xl mx-auto'>This is my first vercel deployment</h1>
-    </div>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/destination' element={<Destination/>}/>
+        <Route path='/crew' element={<Crew/>}/>
+        <Route path='/technology' element={<Technology/>}/>
+      </Routes>
+    </>
   )
 }
 

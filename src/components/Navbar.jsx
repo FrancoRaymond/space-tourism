@@ -34,10 +34,10 @@ const Navbar = () => {
     };
 
     return (
-        <div className="fixed top-5 text-white w-full z-50 flex justify-between px-2 sm:px-5 md:px-10 lg:px-32 pt-3 items-center">
+        <div className="fixed top-5 text-white w-full z-50 flex justify-between pl-2 sm:pl-5 md:pl-10 lg:pl-24 pt-3 items-center">
             <a href=""><img src={logo} alt="logo" className="size-8" /></a> 
             <nav
-                className={` backdrop-blur-md bg-white/20 py-4 px-20 ${
+                className={` backdrop-blur-md bg-white/20 py-4 sm:px-10 md:px-20 ${
                     size >= 640
                         ? 'block relative h-auto bg-transparent' 
                         : isMenuOpen
@@ -85,7 +85,7 @@ const Navbar = () => {
                     <li>
                         <a
                             href="/technology"
-                            className={` ${
+                            className={`sm:mr-5 md:mr-10 lg:mr-24 ${
                                 location.pathname === '/technology'
                                     ? 'border-b-2 border-white'
                                     : ''
@@ -100,13 +100,13 @@ const Navbar = () => {
                 src={menu}
                 onClick={handleMenuClick}
                 alt="hamburger icon"
-                className={`${size >= 640 || isMenuOpen ? 'hidden' : 'block'} size-6 cursor-pointer`}
+                className={`${size >= 640 || isMenuOpen ? 'hidden' : 'block'} size-6 cursor-pointer mr-2`}
             />
             <img
                 src={close}
                 onClick={handleMenuClick}
                 alt="close menu icon"
-                className={`${isMenuOpen ? 'block' : 'hidden'} size-6 cursor-pointer`}
+                className={`${isMenuOpen ? 'block' : 'hidden'} size-6 cursor-pointer mr-2`}
             />
         </div>
     );

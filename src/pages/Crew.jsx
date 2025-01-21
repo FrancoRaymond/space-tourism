@@ -2,8 +2,8 @@ import React from 'react'
 
 const Crew = () => {
   return (
-    <div className='min-h-screen bg-yellow-300'>
-      CREW PAGE
+    <div className='crewPage min-h-screen'>
+      
     </div>
   )
 }

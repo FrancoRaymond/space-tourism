@@ -1,29 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import  {destinations}  from '../assets/data/data.js'
 
 const Destination = () => {
   const [clickedDestination, setClickedDestination] = useState('Moon');
   const [filteredDestination, setFilteredDestination] = useState([]);
-  const [destinations, setDestinations] = useState([]);
-
-  useEffect(() => {
-    fetch('/assets/data/data.json')
-      .then((response) => response.json())
-      .then((data) => {
-        setDestinations(data.destinations);
-        setFilteredDestination(data.destinations.filter((des) => des.name === clickedDestination));
-      })
-      .catch((err) => console.error('Failed to load destinations data:', err));
-  }, []);
 
   useEffect(() => {
     setFilteredDestination(destinations.filter((des) => des.name === clickedDestination));
-  }, [clickedDestination, destinations]);
+  }, [clickedDestination]);
 
   return (
     <div className="destinationPage min-h-screen pt-28 lg:pt-44 px-2 sm:px-5 md:px-10 lg:px-24">
-      <section className="pb-10">
+      {<section className="pb-10">
         <h1 className="text-xl mx-auto lg:mx-0 space-x-2 text-white">So, you want to travel to</h1>
-        <main className="md:flex md:items-center md:mt-7">
+        <main className="md:flex md:mt-7">
           <img
             className="mt-8 size-3/4 mx-auto max-w-80"
             src={filteredDestination.length > 0 ? filteredDestination[0].images.png : ''}
@@ -63,7 +53,7 @@ const Destination = () => {
             </div>
           </div>
         </main>
-      </section>
+      </section>}
     </div>
   );
 };

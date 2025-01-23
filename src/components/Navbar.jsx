@@ -34,7 +34,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="fixed top-5 text-white w-full z-50 flex justify-between pl-2 sm:pl-5 md:pl-10 lg:pl-24 pt-3 items-center">
+        <div className="fixed top-5 text-white bg-black bg-opacity-30 py-3 sm:py-0 sm:pt-3 sm:bg-none w-full z-50 flex justify-between pl-2 sm:pl-5 md:pl-10 lg:pl-24 pt-3 items-center">
             <a href=""><img src={logo} alt="logo" className="size-8" /></a> 
             <nav
                 className={` backdrop-blur-md bg-white/20 py-4 sm:px-10 md:px-20 ${

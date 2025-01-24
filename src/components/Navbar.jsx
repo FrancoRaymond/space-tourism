@@ -1,33 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom'; 
+import { useAppContext } from '../App';
 import logo from '../assets/shared/logo.svg';
 import menu from '../assets/shared/icon-hamburger.svg';
 import close from '../assets/shared/icon-close.svg';
 
 const Navbar = () => {
-    const [size, setSize] = useState(window.innerWidth);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    
     const location = useLocation(); 
+    const { size,isMenuOpen, setIsMenuOpen } = useAppContext();
 
-    useEffect(() => {
-        const handleResize = () => {
-            setSize(window.innerWidth);
-            if (window.innerWidth >= 640) {
-                setIsMenuOpen(false);
-            }
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    useEffect(() => {
-        document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
-        return () => {
-            document.body.style.overflow = 'auto';
-        };
-    }, [isMenuOpen]);
+ 
 
     const handleMenuClick = () => {
         setIsMenuOpen((prev) => !prev);

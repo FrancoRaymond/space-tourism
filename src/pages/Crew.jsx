@@ -1,5 +1,6 @@
 import React,{ useState, useEffect} from 'react'
 import {crew} from '../assets/data/data.js'
+import CrewMemberInfo from '../components/CrewMemberInfo.jsx'
 
 const Crew = () => {
   const [clickedMember, setClickedMember] = useState('Douglas Hurley')
@@ -16,35 +17,16 @@ const Crew = () => {
           <div className='mt-10 md:mt-0'>
             <img 
             src={filteredMembers.length > 0 ? filteredMembers[0].images.png : ''}
-            alt={filteredMembers.length > 0 ? filteredMembers[0].name : 'Destination'}
+            alt={filteredMembers.length > 0 ? filteredMembers[0].name : 'crew'}
             className='h-[80vw] w-[90%] max-h-[350px] max-w-80 object-fit mx-auto md:max-h-[400px] md:max-w-[100%]'
             />
           </div>
-          <div className='flex flex-col md:flex-col-reverse'>
-            <div className='flex gap-3 mx-auto mt-10 md:mx-0'>
-              {
-                crew.map( member => (
-                  <div 
-                    key={member.name} 
-                    onClick={() => setClickedMember(member.name)}
-                    className={`size-3 bg-gray-500 rounded-full ${member.name === clickedMember ? 'bg-white size-4' : ''}`}
-                  > 
-                  </div>          
-                ))
-              }  
-            </div>
-            <div className='md:max-w-md'>
-              {
-                filteredMembers.map(member => (
-                  <div key={member.name} className='flex flex-col gap-5 text-center pt-10 md:text-left'>
-                    <h1 className='text-gray-400 font-semibold'>{member.role.toUpperCase()}</h1>
-                    <h1 className='text-3xl text-white font-semibold'>{member.name.toUpperCase()}</h1>
-                    <p className='text-gray-400'>{member.bio}</p>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
+          <CrewMemberInfo 
+            filteredMembers={filteredMembers}  
+            crew={crew} 
+            clickedMember={clickedMember}
+            setClickedMember={setClickedMember}
+          />
         </div>
     </div>
   )
